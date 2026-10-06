@@ -102,7 +102,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    hostname: ${RAILWAY_PRIVATE_DOMAIN:localhost}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:localhost}
     prefer-ip-address: false
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
