@@ -1,0 +1,29 @@
+server:
+  port: 8088
+  tomcat:
+    max-http-form-post-size: 26MB
+    max-swallow-size: 26MB
+
+spring:
+  application:
+    name: chat-service
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 26MB
+  datasource:
+    url: jdbc:postgresql://localhost:5432/internship_chat_db
+    username: postgres
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
