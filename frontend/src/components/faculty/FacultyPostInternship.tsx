@@ -23,6 +23,7 @@ import {
   X
 } from 'lucide-react';
 import api from '../../services/api';
+import { AI_MATCHER_BASE_URL } from '../../config/api';
 import { SearchableSkillSelect } from '../SearchableSkillSelect';
 
 export const FacultyPostInternship = ({
@@ -109,7 +110,7 @@ export const FacultyPostInternship = ({
     }
     setExtracting(true);
     try {
-      const res = await fetch('http://localhost:5000/api/extract-skills', {
+      const res = await fetch(`${AI_MATCHER_BASE_URL}/api/extract-skills`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: formData.description })

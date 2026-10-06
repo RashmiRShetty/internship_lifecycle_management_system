@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
@@ -9,7 +9,8 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOriginPatterns: "*"
+            allowedOriginPatterns:
+              - ${CORS_ALLOWED_ORIGIN:http://localhost:5173}
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: false
@@ -78,22 +79,30 @@ spring:
           predicates:
             - Path=/recommendations/**
 
+        - id: ai-matcher
+          uri: ${AI_MATCHER_URL:http://localhost:5000}
+          predicates:
+            - Path=/ai/**
+          filters:
+            - StripPrefix=1
+
 jwt:
   secret: ${JWT_SECRET}
 
 logging:
   level:
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.http.server.reactive: DEBUG
-    org.springframework.web.reactive: DEBUG
+    org.springframework.cloud.gateway: INFO
+    org.springframework.http.server.reactive: INFO
+    org.springframework.web.reactive: INFO
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-ip-address: true
+    hostname: ${RAILWAY_PRIVATE_DOMAIN:localhost}
+    prefer-ip-address: false
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10

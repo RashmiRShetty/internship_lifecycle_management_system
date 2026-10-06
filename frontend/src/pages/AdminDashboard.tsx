@@ -211,7 +211,7 @@ const getPhotoUrl = (photoPath?: string) => {
   if (photoPath.startsWith('http://') || photoPath.startsWith('https://') || photoPath.startsWith('data:')) {
     return photoPath;
   }
-  const apiBase = api.defaults.baseURL || 'http://localhost:8080/api';
+  const apiBase = api.defaults.baseURL || 'http://localhost:8080';
   const serverBase = apiBase.replace(/\/api\/?$/, '');
   const cleanPath = photoPath.startsWith('/') ? photoPath : `/${photoPath}`;
   return `${cleanPath.startsWith('/uploads') ? serverBase : apiBase}${cleanPath}`;

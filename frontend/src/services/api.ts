@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:8080'; // API Gateway
+import { API_BASE_URL } from '../config/api';
 
 // Public API - no auth interceptor
 export const publicApi = axios.create({
@@ -68,4 +67,3 @@ export const projectApi = {
   },
   getTaskDetails: (taskId: number | string) => api.get(`/applications/projects/tasks/${taskId}/details`),
 };
-

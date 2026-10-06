@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UploadCloud, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import axios from 'axios';
+import { AI_MATCHER_BASE_URL } from '../config/api';
 
 interface ParsedResumeData {
   skills: string;
@@ -38,7 +39,7 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({ onProfileAutoFil
       formData.append('file', file);
 
       // Call Python AI Resume Parser API directly
-      const response = await axios.post<ParsedResumeData>('http://localhost:5000/api/parse-resume', formData, {
+      const response = await axios.post<ParsedResumeData>(`${AI_MATCHER_BASE_URL}/api/parse-resume`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 

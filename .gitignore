@@ -12,6 +12,8 @@
 **/dist/
 **/dist-ssr/
 /apache-maven-*/
+**/__pycache__/
+*.py[cod]
 
 # Logs and local tooling state
 *.log

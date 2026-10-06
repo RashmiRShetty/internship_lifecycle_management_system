@@ -1,12 +1,12 @@
 server:
-  port: 8091
+  port: ${PORT:8091}
 
 spring:
   application:
     name: recommendation-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/internship_recommendation_db
-    username: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/internship_recommendation_db}
+    username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
@@ -16,11 +16,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+ai:
+  matcher:
+    url: ${AI_MATCHER_URL:http://localhost:5000}
+
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
   instance:
-    prefer-ip-address: true
+    hostname: ${RAILWAY_PRIVATE_DOMAIN:localhost}
+    prefer-ip-address: false
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10

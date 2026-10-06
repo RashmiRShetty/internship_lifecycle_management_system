@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: ${PORT:8084}
   tomcat:
     max-http-form-post-size: 26MB
     max-swallow-size: 26MB
@@ -12,8 +12,8 @@ spring:
       max-file-size: 25MB
       max-request-size: 26MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/internship_application_db
-    username: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/internship_application_db}
+    username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD}
     hikari:
       maximum-pool-size: 5
@@ -29,7 +29,9 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
   instance:
+    hostname: ${RAILWAY_PRIVATE_DOMAIN:localhost}
+    prefer-ip-address: false
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10

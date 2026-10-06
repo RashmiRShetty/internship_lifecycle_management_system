@@ -28,7 +28,7 @@ interface SearchableSkillSelectProps {
   required?: boolean;
 }
 
-const USER_SERVICE_SKILLS_URL = 'http://localhost:8080/users/skills';
+const USER_SERVICE_SKILLS_URL = '/users/skills';
 const filter = createFilterOptions<SkillOption>();
 
 const DEFAULT_SKILLS: SkillOption[] = [

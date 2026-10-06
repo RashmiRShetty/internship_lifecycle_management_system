@@ -1,12 +1,12 @@
 server:
-  port: 8082
+  port: ${PORT:8082}
 
 spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/internship_user_db
-    username: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/internship_user_db}
+    username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD}
     hikari:
       maximum-pool-size: 5
@@ -22,7 +22,9 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
   instance:
+    hostname: ${RAILWAY_PRIVATE_DOMAIN:localhost}
+    prefer-ip-address: false
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10

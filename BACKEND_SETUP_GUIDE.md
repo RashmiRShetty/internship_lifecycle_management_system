@@ -24,7 +24,7 @@ psql -U postgres -f setup_databases.sql
 # When prompted, enter the password configured for your local PostgreSQL user.
 ```
 
-This creates 10 databases:
+This creates 11 databases:
 - `internship_auth_db` (for auth service)
 - `internship_user_db` (for user service)
 - ... and 8 more microservice databases

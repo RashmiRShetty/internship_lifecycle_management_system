@@ -4,6 +4,7 @@ import com.internship.recommendationservice.dto.InternshipDto;
 import com.internship.recommendationservice.dto.RecommendationResultDto;
 import com.internship.recommendationservice.dto.StudentDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -16,6 +17,9 @@ public class SemanticMatcherService {
 
     @Autowired(required = false)
     private WebClient.Builder webClientBuilder;
+
+    @Value("${ai.matcher.url}")
+    private String aiMatcherUrl;
 
     private static final double MIN_MATCH_PERCENT = 15.0;
     private static final double MAX_MATCH_PERCENT = 98.0;
@@ -185,7 +189,7 @@ public class SemanticMatcherService {
                     ? webClientBuilder.build()
                     : WebClient.create();
 
-            System.out.println("=== Calling Python Flask AI Engine (http://localhost:5000/api/match) ===");
+            System.out.println("=== Calling Python Flask AI Engine ===");
             System.out.println("Student Email: " + student.getEmail());
             System.out.println("Student Skills: " + student.getSkills());
             System.out.println("Student ProgLangs: " + student.getProgrammingLanguages());
@@ -197,7 +201,7 @@ public class SemanticMatcherService {
             System.out.println("Internship SkillsReq: " + internship.getSkillsRequired());
 
             RecommendationResultDto flaskResult = client.post()
-                    .uri("http://localhost:5000/api/match")
+                    .uri(aiMatcherUrl + "/api/match")
                     .bodyValue(payload)
                     .retrieve()
                     .bodyToMono(RecommendationResultDto.class)

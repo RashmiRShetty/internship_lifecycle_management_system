@@ -8,7 +8,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+cors_origins = os.environ.get("CORS_ORIGINS", "*")
+CORS(app, origins=[origin.strip() for origin in cors_origins.split(",") if origin.strip()])
 
 # Global Configuration Constants
 SIMILARITY_THRESHOLD = 0.75  # Raised from 0.70 to reduce false-positive semantic matches
